@@ -1,0 +1,42 @@
+{
+  "name": "core-interval",
+  "authors": [
+    "Ewgenius <ewgeniux@gmail.com>"
+  ],
+  "description": "Managing interval value",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "seed"
+  ],
+  "main": "core-interval.html",
+  "license": "MIT",
+  "homepage": "https://github.com/ewgenius/core-interval",
+  "ignore": [
+    "/.*",
+    "/tests/",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "../",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "~0.5.2"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^2.0.5"
+  },
+  "_release": "0a662704cd",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "0a662704cdd381ac5f2a0e8b9cd2115af1c6f3b3"
+  },
+  "_source": "git://github.com/ewgenius/core-interval.git",
+  "_target": "master",
+  "_originalSource": "ewgenius/core-interval",
+  "_direct": true
+}

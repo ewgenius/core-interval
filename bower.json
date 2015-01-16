@@ -1,0 +1,7 @@
+{
+  "name": "core-interval#gh-pages",
+  "private": true,
+  "dependencies": {
+    "core-interval": "ewgenius/core-interval#master"
+  }
+}
