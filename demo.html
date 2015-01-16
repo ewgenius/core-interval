@@ -60,7 +60,7 @@
 
     </style>
 
-    <core-interval min="{{min}}" max="{{max}}" valueA="{{valueA}}" valueB="{{valueB}}" ratioA="{{ratioA}}"
+    <core-interval id="interval" min="{{min}}" max="{{max}}" valueA="{{valueA}}" valueB="{{valueB}}" ratioA="{{ratioA}}"
                    ratioB="{{ratioB}}" interval="{{interval}}" minInterval="{{minInterval}}"></core-interval>
 
     <div vertical layout>
@@ -82,6 +82,11 @@
       <div class="progress" horizontal center layout _style="margin-left: {{ratioA}}%; width: {{interval}}%;">
         <div class="progress-value">{{interval}}%</div>
       </div>
+    </div>
+
+    <div>
+      min: {{$.interval.min}}<br>
+      max: {{$.interval.max}}<br>
     </div>
 
   </template>
