@@ -70,21 +70,27 @@
         notify: true
       }
     },
+
     observers: [
       '_update(valueFrom, valueTo, min, max, step)'
     ],
+
     _calcRatio: function(value) {
       return (this._clampValue(value) - this.min) / (this.max - this.min);
     },
+
     _clampValue: function(value) {
       return Math.min(this.max, Math.max(this.min, this._calcStep(value)));
     },
+
     _clampValueFrom: function(value) {
       return Math.min(this.valueTo, this._clampValue(value));
     },
+
     _clampValueTo: function(value) {
       return Math.max(this.valueFrom, this._clampValue(value));
     },
+
     _calcStep: function(value) {
       value = parseFloat(value);
       if (!this.step) {
@@ -97,16 +103,19 @@
         return numSteps * this.step + this.min;
       }
     },
+
     _validateValueFrom: function() {
       var v = this._clampValueFrom(this.valueFrom);
       this.valueFrom = this.oldValueFrom = isNaN(v) ? this.oldValueFrom : v;
       return this.valueFrom !== v;
     },
+
     _validateValueTo: function() {
       var v = this._clampValueTo(this.valueTo);
       this.valueTo = this.oldValueTo = isNaN(v) ? this.oldValueTo : v;
       return this.valueTo !== v;
     },
+    
     _update: function() {
       this._validateValueFrom();
       this._validateValueTo();
