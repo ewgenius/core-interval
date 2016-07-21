@@ -1,5 +1,6 @@
 {
   "name": "iron-interval-behavior",
+  "version": "1.0.0",
   "description": "Managing a numeric interval within a given bounds",
   "main": "iron-interval-behavior.html",
   "dependencies": {
