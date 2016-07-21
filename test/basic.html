@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>iron-range-behavior</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../test-fixture/test-fixture-mocha.js"></script>
+
+  <link rel="import" href="x-intervalbar.html">
+  <link rel="import" href="../../test-fixture/test-fixture.html">
+</head>
+
+<body>
+
+  <test-fixture id="trivialInterval">
+    <template>
+      <x-intervalbar/>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('<x-intervalbar>', function() {
+      var range;
+      setup(function() {
+        range = fixture('trivialRange');
+      });
+      test('check default', function() {
+        assert.equal(range.min, 0);
+        assert.equal(range.max, 100);
+        assert.equal(range.valueFrom, 0);
+        assert.equal(range.valueTo, 0);
+      });
+      
+      test('set valueFrom', function(done) {
+        range.valueFrom = 50;
+        flush(function() {
+          assert.equal(range.valueFrom, 50);
+          range.valueFrom = 60.1;
+          flush(function() {
+            assert.equal(range.valueFrom, 60);
+            done();
+          });
+        });
+      });
+
+      test('set valueTo', function(done) {
+        range.valueTo = 50;
+        flush(function() {
+          assert.equal(range.valueTo, 50);
+          range.valueTo = 60.1;
+          flush(function() {
+            assert.equal(range.valueTo, 60);
+            done();
+          });
+        });
+      });
+
+      test('set max', function(done) {
+        range.max = 10;
+        range.valueFrom = 11;
+        flush(function() {
+          assert.equal(range.valueFrom, range.max);
+          done();
+        });
+      });
+
+      test('test ratio', function(done) {
+        range.max = 10;
+        range.valueFrom = 5;
+        flush(function() {
+          assert.equal(range.ratioFrom, 50);
+          done();
+        });
+      });
+
+      test('set min', function(done) {
+        range.min = 10
+        range.max = 50;
+        range.valueFrom = 30;
+        flush(function() {
+          assert.equal(range.ratioFrom, 50);
+          range.valueFrom = 0;
+          flush(function() {
+            assert.equal(range.valueFrom, range.min);
+            done();
+          });
+        });
+      });
+
+      test('set step', function(done) {
+        range.min = 0;
+        range.max = 10;
+        range.valueFrom = 5.1;
+        flush(function() {
+          assert.equal(range.valueFrom, 5);
+          range.step = 0.1;
+          range.valueFrom = 5.1;
+          flush(function() {
+            assert.equal(range.valueFrom, 5.1);
+            done();
+          });
+        });
+      });
+
+      test('set large step', function(done) {
+        range.min = 0;
+        range.max = 2625;
+        range.step = 875;
+        range.valueFrom = 875;
+        flush(function() {
+          assert.equal(range.valueFrom, 875);
+          done();
+        });
+      });
+
+      test('set step with min', function(done) {
+        range.min = -0.9;
+        range.max = 1.1;
+        range.step = 0.5;
+        range.valueFrom = -0.5;
+        flush(function() {
+          assert.equal(range.value, -0.4);
+          range.valueFrom = 0.7;
+          flush(function() {
+            assert.equal(range.value, 0.6);
+            done();
+          });
+        });
+      });
+
+      test('odd values', function(done) {
+        range.min = 1;
+        range.max = 7;
+        range.step = 2;
+        range.valueFrom = 3;
+        flush(function() {
+          assert.equal(range.value, 3);
+          range.valueFrom += range.step;
+          assert.equal(range.value, 5);
+          range.valueFrom += range.step;
+          assert.equal(range.value, 7);
+          done();
+        });
+      });
+
+      test('negative values should round up', function(done) {
+        range.min = -10;
+        range.max = 10;
+        range.step = 0.1;
+        range.valueFrom = -8.4252;
+        flush(function() {
+          assert.equal(range.value, -8.4);
+          done();
+        });
+      });
+
+      test('positive values should round up', function(done) {
+        range.min = 10;
+        range.max = 100;
+        range.step = 0.25;
+        range.valueFrom = 19.34567;
+        flush(function() {
+          assert.equal(range.value, 19.25);
+          done();
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>

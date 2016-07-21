@@ -1,29 +1,77 @@
 <!doctype html>
 <html>
-  <head>
-    <title>iron-interval-behavior demo</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+<head>
+  <title>iron-interval-behavior demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="../iron-interval-behavior.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
 
-    <style is="custom-style" include="demo-pages-shared-styles">
-    </style>
-  </head>
-  <body>
+  <link rel="import" href="../iron-interval-behavior.html">
+  <link rel="import" href="../../iron-input/iron-input.html">
 
-    <div class="vertical-section-container centered">
-      <h3>Basic iron-interval-behavior Demo</h3>
-      <demo-snippet>
-        <template>
-          <iron-interval-behavior></iron-interval-behavior>
-        </template>
-      </demo-snippet>
-    </div>
+  <style is="custom-style" include="demo-pages-shared-styles">
 
-  </body>
+  </style>
+</head>
+
+<body unresolved>
+  <dom-module id="x-intervalbar">
+    <template>
+      <style>
+        :host {
+          display: block;
+          background-color: #555;
+          border-radius: 4px;
+          padding: 8px;
+          box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .progress {
+          background-color: #999;
+          height: 100%;
+          border-radius: 4px;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+        
+        .progress-value {
+          padding: 0 8px;
+          font-size: 18px;
+          color: #fff;
+        }
+      </style>
+
+      <input is="iron-input" bind-value="{{valueFrom}}">
+      <input is="iron-input" bind-value="{{valueTo}}">
+      <div class="progress" horizontal center layout style$="{{_computeStyle(ratioFrom, ratioTo)}}">
+        <div class="progress-value" />
+      </div>
+      <span>from {{valueFrom}} to {{valueTo}}</span>
+      <br />
+      <span>ratioFrom: {{ratioFrom}}</span>
+      <br />
+      <span>ratioTo: {{ratioTo}}</span>
+    </template>
+  </dom-module>
+
+  <script>
+      HTMLImports.whenReady(function() {
+        Polymer({
+          is: 'x-intervalbar',
+          
+          behaviors: [Polymer.IronIntervalBehavior],
+          
+          _computeStyle: function(ratioFrom, ratioTo) {
+            return 'width: ' + (ratioTo - ratioFrom) + '%; margin-left: ' + ratioFrom + '%;';
+          }
+        });
+      });
+    </script>
+
+  <x-intervalbar min="0" max="100" valueFrom="40" valueTo="80"></x-intervalbar>
+</body>
+
 </html>
