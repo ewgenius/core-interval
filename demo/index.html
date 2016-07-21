@@ -58,18 +58,18 @@
   </dom-module>
 
   <script>
-      HTMLImports.whenReady(function() {
-        Polymer({
-          is: 'x-intervalbar',
-          
-          behaviors: [Polymer.IronIntervalBehavior],
-          
-          _computeStyle: function(ratioFrom, ratioTo) {
-            return 'width: ' + (ratioTo - ratioFrom) + '%; margin-left: ' + ratioFrom + '%;';
-          }
-        });
+    HTMLImports.whenReady(function() {
+      Polymer({
+        is: 'x-intervalbar',
+
+        behaviors: [Polymer.IronIntervalBehavior],
+
+        _computeStyle: function(ratioFrom, ratioTo) {
+          return 'width: ' + (ratioTo - ratioFrom) + '%; margin-left: ' + ratioFrom + '%;';
+        }
       });
-    </script>
+    });
+  </script>
 
   <x-intervalbar min="0" max="100" valueFrom="40" valueTo="80"></x-intervalbar>
 </body>
